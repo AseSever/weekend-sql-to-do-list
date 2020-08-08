@@ -19,34 +19,20 @@ function getTasks(){
         $('#taskListOut').empty();
         for( let i = 0; i < response.length; i++) {
             let newTask = response[i];
-            let $ul = $(`<li></li>`);
-            $ul.append(`${newTask.task}`);
-            $ul.append(`${newTask.notes}`);
-            $ul.append(`${newTask.date_made}`);
-            $ul.append(`${newTask.status}`);
+
+            $('#taskListOut').append(`<li>${newTask.task}
+            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn">Complete</button>
+            <button data-task-id="${newTask.id}" class="deleteBtn">Delete</button></li>
+            <ul>
+                <li>${newTask.notes}</li>
+                <li>${newTask.date_made}</li>
+            </ul>`);
     
-            $('#taskListOut').append($ul);
         }
     }).catch(function(error) {
         console.log('error in GET request');
         alert('Error with GET request')
     });
 }
-
-
-// // appending to DOM function
-// function showTasks(newTask) {
-
-//     $('#taskListOut').empty();
-//     for( let i = 0; i < newTask.length; i++) {
-//         let newTask = newTask[i];
-
-//         let $ul = $(`<li></li>`);
-//         $ul.append(`${newTask.task}`);
-//         $ul.append(`${newTask.notes}`);
-//         $ul.append(`${newTask.date_made}`);
-//         $ul.append(`${newTask.status}`);
-
-//         $('#taskListOut').append($ul);
-//     }
-// } // end showTasks
+/* <button class="completeBtn" data-task-id="${newTask.id}" data-task-status="${newTask.status}">Complete</button>
+                    <button class="deleteBtn" data-task-id="${newTask.id}>Delete</button> */
