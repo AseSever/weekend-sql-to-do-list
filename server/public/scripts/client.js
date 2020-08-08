@@ -6,7 +6,34 @@ function handleReady() {
     console.log('JQ loaded');
     // shows list of tasks
     getTasks();
+    // submit click listener
+    $('#submitTask').on('click', submitHandle);
+
 }// end handleReady
+
+function submitHandle() {
+    console.log('submit click');
+
+    //object for POST request
+    const newTask = {
+        task: $('#taskIn').val(),
+        notes: $('#notesIn').val(),
+        date_made: $('#dateIn').val()
+    };
+    
+    $.ajax({
+        method: 'POST',
+        url: '/tasks',
+        data: newTask
+    }).then(function (response) {
+        console.log('in POST request', response);
+        
+    }).catch(function (error) {
+        console.log('ERROR in POST request', error);
+        alert('Error with submitting task.')
+    });
+    
+}
 
 // get request for task list from db
 function getTasks(){
@@ -34,5 +61,3 @@ function getTasks(){
         alert('Error with GET request')
     });
 }
-/* <button class="completeBtn" data-task-id="${newTask.id}" data-task-status="${newTask.status}">Complete</button>
-                    <button class="deleteBtn" data-task-id="${newTask.id}>Delete</button> */
