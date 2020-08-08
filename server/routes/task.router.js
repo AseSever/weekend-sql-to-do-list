@@ -21,6 +21,7 @@ taskRouter.get('/', (req, res) => {
 
 });
 
+//post route sends data to DB
 taskRouter.post('/', (req, res) => {
     console.log('in POST route', req.body);
     let queryText = `
@@ -40,9 +41,21 @@ taskRouter.post('/', (req, res) => {
 
 //delete route 
 taskRouter.delete('/:id', (req, res) => {
-    console.log('delete route id:', req.params.id);
+    let id = req.params.id;
+    console.log('delete route id:', id);
     
-    res.sendStatus(500);
+    let queryText = `
+        DELETE FROM "task_list"
+        WHERE "id" = $1;
+    `
+    pool.query(queryText, [id]).then(result => {
+        console.log(result);
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('ERROR in DELETE route', error);
+        res.sendStatus(500);
+    });
+    
 });
 
 

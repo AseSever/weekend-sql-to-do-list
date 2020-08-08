@@ -24,7 +24,7 @@ function deleteHandle() {
         url: `/tasks/${taskToDelete}`
     }).then(function (response) {
         console.log('in delete request', response);
-
+        getTasks();
     }).catch(function (error) {
         console.log('ERROR ind DELETE request', error);
         
@@ -39,9 +39,8 @@ function submitHandle() {
     const newTask = {
         task: $('#taskIn').val(),
         notes: $('#notesIn').val(),
-        // date_made: $('#dateIn').val()
     };
-
+    // POST request
     $.ajax({
         method: 'POST',
         url: '/tasks',
@@ -51,7 +50,7 @@ function submitHandle() {
         //empty DOM
         $('#taskIn').val('');
         $('#notesIn').val('');
-        // $('#dateIn').val('');
+       
         //appending new info
         getTasks();
     }).catch(function (error) {
@@ -84,6 +83,6 @@ function getTasks() {
         }
     }).catch(function (error) {
         console.log('error in GET request');
-        alert('Error with GET request')
+        alert('Error with server request')
     });
 }// end getTasks
