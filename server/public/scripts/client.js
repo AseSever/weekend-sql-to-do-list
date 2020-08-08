@@ -27,7 +27,12 @@ function submitHandle() {
         data: newTask
     }).then(function (response) {
         console.log('in POST request', response);
-        
+        //empty DOM
+        $('#taskIn').val('');
+        $('#notesIn').val('');
+        $('#dateIn').val('');
+        //appending new info
+        getTasks();
     }).catch(function (error) {
         console.log('ERROR in POST request', error);
         alert('Error with submitting task.')
