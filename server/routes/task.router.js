@@ -24,10 +24,10 @@ taskRouter.get('/', (req, res) => {
 taskRouter.post('/', (req, res) => {
     console.log('in POST route', req.body);
     let queryText = `
-        INSERT INTO "task_list" ("task", "notes", "date_made")
-        VALUES ($1, $2, $3);
+        INSERT INTO "task_list" ("task", "notes")
+        VALUES ($1, $2);
         `
-    let values = [req.body.task, req.body.notes, req.body.date_made];
+    let values = [req.body.task, req.body.notes];
     pool.query(queryText, values).then(result => {
         console.log('task router POST', result);
         res.sendStatus(200)

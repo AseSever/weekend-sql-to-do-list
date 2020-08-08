@@ -18,7 +18,7 @@ function submitHandle() {
     const newTask = {
         task: $('#taskIn').val(),
         notes: $('#notesIn').val(),
-        date_made: $('#dateIn').val()
+        // date_made: $('#dateIn').val()
     };
     
     $.ajax({
@@ -30,7 +30,7 @@ function submitHandle() {
         //empty DOM
         $('#taskIn').val('');
         $('#notesIn').val('');
-        $('#dateIn').val('');
+        // $('#dateIn').val('');
         //appending new info
         getTasks();
     }).catch(function (error) {
@@ -53,7 +53,7 @@ function getTasks(){
             let newTask = response[i];
 
             $('#taskListOut').append(`<li>${newTask.task}
-            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn">Complete</button>
+            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn">&check;</button>
             <button data-task-id="${newTask.id}" class="deleteBtn">Delete</button></li>
             <ul>
                 <li>${newTask.notes}</li>
