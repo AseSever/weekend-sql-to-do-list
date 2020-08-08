@@ -8,8 +8,29 @@ function handleReady() {
     getTasks();
     // submit click listener
     $('#submitTask').on('click', submitHandle);
+    // delete click listener
+    $('#outputDiv').on('click', '.deleteBtn', deleteHandle);
 
 }// end handleReady
+
+// to delete our tasks
+function deleteHandle() {
+    console.log('delete clicked');
+    let taskToDelete = $(this).data('task-id')
+    console.log(taskToDelete);
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${taskToDelete}`
+    }).then(function (response) {
+        console.log('in delete request', response);
+
+    }).catch(function (error) {
+        console.log('ERROR ind DELETE request', error);
+        
+    });
+
+}// end deleteHandle
 
 function submitHandle() {
     console.log('submit click');
@@ -20,7 +41,7 @@ function submitHandle() {
         notes: $('#notesIn').val(),
         // date_made: $('#dateIn').val()
     };
-    
+
     $.ajax({
         method: 'POST',
         url: '/tasks',
@@ -37,19 +58,19 @@ function submitHandle() {
         console.log('ERROR in POST request', error);
         alert('Error with submitting task.')
     });
-    
-}
+
+}// end submit handle
 
 // get request for task list from db
-function getTasks(){
+function getTasks() {
 
     $.ajax({
         method: 'GET',
         url: '/tasks'
-    }).then(function(response) {
+    }).then(function (response) {
         console.log('In GET:', response);
         $('#taskListOut').empty();
-        for( let i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.length; i++) {
             let newTask = response[i];
 
             $('#taskListOut').append(`<li>${newTask.task}
@@ -59,10 +80,10 @@ function getTasks(){
                 <li>${newTask.notes}</li>
                 <li>${newTask.date_made}</li>
             </ul>`);
-    
+
         }
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log('error in GET request');
         alert('Error with GET request')
     });
-}
+}// end getTasks

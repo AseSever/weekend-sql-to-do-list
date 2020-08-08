@@ -38,6 +38,13 @@ taskRouter.post('/', (req, res) => {
     });
 });
 
+//delete route 
+taskRouter.delete('/:id', (req, res) => {
+    console.log('delete route id:', req.params.id);
+    
+    res.sendStatus(500);
+});
+
 
 
 module.exports = taskRouter;
