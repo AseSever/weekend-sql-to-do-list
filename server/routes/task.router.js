@@ -21,7 +21,22 @@ taskRouter.get('/', (req, res) => {
 
 });
 
-
+taskRouter.post('/', (req, res) => {
+    console.log('in POST route', req.body);
+    let queryText = `
+        INSERT INTO "task_list" ("task", "notes", "date_made")
+        VALUES ($1, $2, $3);
+        `
+    let values = [req.body.task, req.body.notes, req.body.date_made];
+    pool.query(queryText, values).then(result => {
+        console.log('task router POST', result);
+        res.sendStatus(200)
+        
+    }).catch(error => {
+        console.log('ERROR in POST route', error);
+        res.sendStatus(500);
+    });
+});
 
 
 
