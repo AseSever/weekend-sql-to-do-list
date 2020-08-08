@@ -8,8 +8,7 @@ const taskRouter = express.Router();
 taskRouter.get('/', (req, res) => {
     let queryText = `
         SELECT * FROM "task_list" 
-        ORDER BY "date_made" 	
-        ;
+        ORDER BY "date_made";
         `;
 
     pool.query(queryText).then(result => {

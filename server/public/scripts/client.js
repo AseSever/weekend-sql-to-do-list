@@ -10,8 +10,31 @@ function handleReady() {
     $('#submitTask').on('click', submitHandle);
     // delete click listener
     $('#outputDiv').on('click', '.deleteBtn', deleteHandle);
+    //toggle complete task 
+    $('#outputDiv').on('click', '.completeBtn', taskToggleComplete);
 
 }// end handleReady
+
+//toggle complete task function
+function taskToggleComplete() {
+    console.log('complete clicked');
+    const id = $(this).data('task-id');
+    const status = $(this).data('task-status');
+    console.log(id, status);
+    
+    // PUT request -- status = complete or not
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${id}`,
+        data: {newStatus: !status}
+    }).then(function (response) {
+        console.log('in PUT', response);
+        getTasks();
+    }).catch(function (error) {
+        console.log('ERROR in PUT request', error);
+        
+    });
+}
 
 // to delete our tasks
 function deleteHandle() {
