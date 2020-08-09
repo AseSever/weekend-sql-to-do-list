@@ -1,3 +1,5 @@
+// const { default: swal } = require("sweetalert");
+
 console.log('JS loaded');
 
 $(document).ready(handleReady);
@@ -40,16 +42,34 @@ function deleteHandle() {
     console.log('delete clicked');
     let taskToDelete = $(this).data('task-id')
     console.log(taskToDelete);
-    // delete rquest
-    $.ajax({
-        method: 'DELETE',
-        url: `/tasks/${taskToDelete}`
-    }).then(function (response) {
-        console.log('in delete request', response);
-        getTasks();
-    }).catch(function (error) {
-        console.log('ERROR ind DELETE request', error);
-    });
+
+    swal({
+        title: "Are you sure?",
+        text: "You'll have to do it eventually...",
+        icon: "warning",
+        buttons: ["No", "Yes"],
+        dangerMode: 'No',
+    }).then((willDelete) => {
+        if (willDelete) {
+            swal("Task deleted", {
+                icon: "success",
+            });
+            // delete rquest
+            $.ajax({
+                method: 'DELETE',
+                url: `/tasks/${taskToDelete}`
+            }).then(function (response) {
+                console.log('in delete request', response);
+                getTasks();
+            }).catch(function (error) {
+                console.log('ERROR ind DELETE request', error);
+            });
+        } else {
+            swal("Task survives another day.");
+        }
+
+    })
+
 }// end deleteHandle
 
 function submitHandle() {
@@ -62,7 +82,7 @@ function submitHandle() {
     };
 
     if (newTask.task === '' || newTask === '') {
-        alert('Please add a task and note')
+        swal("Oops!", "Please add a task and note", "error")
     } else {
         // POST request
         $.ajax({
@@ -71,7 +91,7 @@ function submitHandle() {
             data: newTask
         }).then(function (response) {
             console.log('in POST request', response);
-            //empty DOM
+            //empty DOM inputs
             $('#taskIn').val('');
             $('#notesIn').val('');
             //appending new info

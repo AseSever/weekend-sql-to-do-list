@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Stack Full CRUD To-Do App</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="/vendors/bootstrap.css">
     <link rel="stylesheet" href="/styles/style.css">
     <script src="/vendors/jquery-3.5.1.min.js"></script>
@@ -11,12 +12,12 @@
 </head>
 <body>
     <h1>To-Do List</h1>
-    <div id="inputDiv" class="input-group mb-3">
+    <div id="inputDiv" class="input-group mb-3 container">
         <input id="taskIn" type="text" placeholder="Task" class="form-control" aria-label="Default"><br><br>
         <input id="notesIn" type="text" placeholder="Note" class="form-control" aria-label="Default"><br><br>
         <button id="submitTask" class="btn btn-secondary btn-lg btn-block">Submit</button><br><br>
     </div>
-    <div id="outputDiv">
+    <div id="outputDiv" class="container">
         <ul class="list-group " id="taskListOut">
         </ul>
     </div>
