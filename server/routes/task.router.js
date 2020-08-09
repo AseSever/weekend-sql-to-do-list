@@ -27,6 +27,7 @@ taskRouter.post('/', (req, res) => {
         INSERT INTO "task_list" ("task", "notes")
         VALUES ($1, $2);
         `
+    // setting values for clarity
     let values = [req.body.task, req.body.notes];
     pool.query(queryText, values).then(result => {
         console.log('task router POST', result);

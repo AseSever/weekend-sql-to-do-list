@@ -13,12 +13,11 @@ const pool = new Pool(config);
 
 pool.on('connect', () => {
     console.log('connected to db');
-    
 });
+
 
 pool.on('error', (error) => {
     console.log('ERROR connecting to db:', error);
-
 });
 
 module.exports = pool;

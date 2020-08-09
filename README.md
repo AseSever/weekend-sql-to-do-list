@@ -1,9 +1,28 @@
-# Project Name
+# Full Stack Full CRUD To-Do List
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+An application to make some tasks for doing later.
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+### Base Mode
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+  I wanted to make a simple application to record a task and a note for said task.  When you create a task you will see task, your notes, and date created for the task made.  
+  
+  The big problem I had was adding a class to the div I was chosing, and basing the logic around if/else but was being unsuccessful so I ended up hard coding into if/else appending logic.
+
+
+#### Required Install
+```
+npm install express
+npm install pg
+npm install sweetalert --save
+```
+
+#### Built On
+```
+jquery
+node.js
+express library
+postgreSQL
+bootstrap for styling
+```
