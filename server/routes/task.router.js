@@ -65,6 +65,7 @@ taskRouter.put('/:id', (req, res) => {
         SET "status" = $1 
         WHERE id = $2
         `
+    // setting values for clarity around completeing tasks
     const values = [req.body.newStatus, req.params.id];
     
     pool.query(queryText, values).then(result => {

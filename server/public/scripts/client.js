@@ -21,18 +21,17 @@ function taskToggleComplete() {
     const id = $(this).data('task-id');
     const status = $(this).data('task-status');
     console.log(id, status);
-    
+
     // PUT request -- status = complete or not
     $.ajax({
         method: 'PUT',
         url: `/tasks/${id}`,
-        data: {newStatus: !status}
+        data: { newStatus: !status }
     }).then(function (response) {
         console.log('in PUT', response);
         getTasks();
     }).catch(function (error) {
         console.log('ERROR in PUT request', error);
-        
     });
 }
 
@@ -41,7 +40,7 @@ function deleteHandle() {
     console.log('delete clicked');
     let taskToDelete = $(this).data('task-id')
     console.log(taskToDelete);
-
+    // delete rquest
     $.ajax({
         method: 'DELETE',
         url: `/tasks/${taskToDelete}`
@@ -50,9 +49,7 @@ function deleteHandle() {
         getTasks();
     }).catch(function (error) {
         console.log('ERROR ind DELETE request', error);
-        
     });
-
 }// end deleteHandle
 
 function submitHandle() {
@@ -73,7 +70,7 @@ function submitHandle() {
         //empty DOM
         $('#taskIn').val('');
         $('#notesIn').val('');
-       
+
         //appending new info
         getTasks();
     }).catch(function (error) {
@@ -85,7 +82,6 @@ function submitHandle() {
 
 // get request for task list from db
 function getTasks() {
-
     $.ajax({
         method: 'GET',
         url: '/tasks'
@@ -95,15 +91,27 @@ function getTasks() {
         for (let i = 0; i < response.length; i++) {
             let newTask = response[i];
 
-            $('#taskListOut').append(`<li>${newTask.task}
+            //if status is true will give background color to html
+            if (newTask.status === true) {
+                $('#taskListOut').append(`<div class="complete-task"><li class="task-todo">${newTask.task}
             <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn">&check;</button>
             <button data-task-id="${newTask.id}" class="deleteBtn">Delete</button></li>
-            <ul>
+            <ul class="task-info">
                 <li>${newTask.notes}</li>
                 <li>${newTask.date_made}</li>
-            </ul>`);
+            </ul></div>`);
+            //if status is false will not give background color to html
+            } else if (newTask.status === false){
+                $('#taskListOut').append(`<div><li class="task-todo">${newTask.task}
+            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn">&check;</button>
+            <button data-task-id="${newTask.id}" class="deleteBtn">Delete</button></li>
+            <ul class="task-info">
+                <li>${newTask.notes}</li>
+                <li>${newTask.date_made}</li>
+            </ul></div>`);
+            }
+        }// for loop 
 
-        }
     }).catch(function (error) {
         console.log('error in GET request');
         alert('Error with server request')
