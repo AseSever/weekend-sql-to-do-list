@@ -93,21 +93,23 @@ function getTasks() {
 
             //if status is true will give background color to html
             if (newTask.status === true) {
-                $('#taskListOut').append(`<div class="complete-task"><li class="task-todo">${newTask.task}
-            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn">&check;</button>
-            <button data-task-id="${newTask.id}" class="deleteBtn">Delete</button></li>
-            <ul class="task-info">
-                <li>${newTask.notes}</li>
-                <li>${newTask.date_made}</li>
+                $('#taskListOut').append(`<div>
+                <li class="list-group-item list-group-item-action list-group-item-success task-todo">${newTask.task}
+            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn btn btn-outline-success">&check;</button>
+            <button data-task-id="${newTask.id}" class="deleteBtn btn btn-dark btn-sm">Delete</button></li>
+            <ul class="task-info list-group">
+                <li class="list-group-item list-group-item-action list-group-item-success">${newTask.notes}</li>
+                <li class="list-group-item list-group-item-action list-group-item-success">${newTask.date_made}</li>
             </ul></div>`);
             //if status is false will not give background color to html
             } else if (newTask.status === false){
-                $('#taskListOut').append(`<div><li class="task-todo">${newTask.task}
-            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn">&check;</button>
-            <button data-task-id="${newTask.id}" class="deleteBtn">Delete</button></li>
-            <ul class="task-info">
-                <li>${newTask.notes}</li>
-                <li>${newTask.date_made}</li>
+                $('#taskListOut').append(`<div>
+                <li class="list-group-item list-group-item-action list-group-item-light task-todo">${newTask.task}
+            <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn btn btn-outline-success">&check;</button>
+            <button data-task-id="${newTask.id}" class="deleteBtn btn btn-dark btn-sm">Delete</button></li>
+            <ul class="task-info list-group">
+                <li class="list-group-item list-group-item-action list-group-item-light">${newTask.notes}</li>
+                <li class="list-group-item list-group-item-action list-group-item-light">${newTask.date_made}</li>
             </ul></div>`);
             }
         }// for loop 

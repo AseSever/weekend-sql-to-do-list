@@ -1,6 +1,13 @@
+html {
+    margin: 2rem;
+}
+
+
 h1 {
     color: orangered;
+    text-align: center;
 }
+
 
 .complete-task {
     background-color: gold;
