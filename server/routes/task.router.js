@@ -57,6 +57,25 @@ taskRouter.delete('/:id', (req, res) => {
     
 });
 
+//PUT route
+taskRouter.put('/:id', (req, res) => {
+    console.log('In PUT', req.body, req.params.id);
+    const queryText = `
+        UPDATE "task_list" 
+        SET "status" = $1 
+        WHERE id = $2
+        `
+    const values = [req.body.newStatus, req.params.id];
+    
+    pool.query(queryText, values).then(result => {
+        console.log(result);
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('ERROR in PUT route', error);
+        res.sendStatus(500);
+    }); 
+});
+
 
 
 module.exports = taskRouter;
