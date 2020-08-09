@@ -18,8 +18,8 @@ function handleReady() {
 //toggle complete task function
 function taskToggleComplete() {
     console.log('complete clicked');
-    const id = $(this).data('task-id');
-    const status = $(this).data('task-status');
+    const id = $(this).data('task-id'); // targeting chosen id
+    const status = $(this).data('task-status'); // targeting chosen status --true or false
     console.log(id, status);
 
     // PUT request -- status = complete or not
@@ -60,23 +60,27 @@ function submitHandle() {
         task: $('#taskIn').val(),
         notes: $('#notesIn').val(),
     };
-    // POST request
-    $.ajax({
-        method: 'POST',
-        url: '/tasks',
-        data: newTask
-    }).then(function (response) {
-        console.log('in POST request', response);
-        //empty DOM
-        $('#taskIn').val('');
-        $('#notesIn').val('');
 
-        //appending new info
-        getTasks();
-    }).catch(function (error) {
-        console.log('ERROR in POST request', error);
-        alert('Error with submitting task.')
-    });
+    if (newTask.task === '' || newTask === '') {
+        alert('Please add a task and note')
+    } else {
+        // POST request
+        $.ajax({
+            method: 'POST',
+            url: '/tasks',
+            data: newTask
+        }).then(function (response) {
+            console.log('in POST request', response);
+            //empty DOM
+            $('#taskIn').val('');
+            $('#notesIn').val('');
+            //appending new info
+            getTasks();
+        }).catch(function (error) {
+            console.log('ERROR in POST request', error);
+            alert('Error with submitting task.')
+        });
+    }// end conditional if fields are empty
 
 }// end submit handle
 
@@ -96,17 +100,17 @@ function getTasks() {
                 $('#taskListOut').append(`<div>
                 <li class="list-group-item list-group-item-action list-group-item-success task-todo">${newTask.task}
             <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn btn btn-outline-success">&check;</button>
-            <button data-task-id="${newTask.id}" class="deleteBtn btn btn-dark btn-sm">Delete</button></li>
+            <button data-task-id="${newTask.id}" class="deleteBtn btn btn-danger btn-sm float-right">Delete</button></li>
             <ul class="task-info list-group">
                 <li class="list-group-item list-group-item-action list-group-item-success">${newTask.notes}</li>
                 <li class="list-group-item list-group-item-action list-group-item-success">${newTask.date_made}</li>
             </ul></div>`);
-            //if status is false will not give background color to html
-            } else if (newTask.status === false){
+                //if status is false will not give background color to html
+            } else if (newTask.status === false) {
                 $('#taskListOut').append(`<div>
                 <li class="list-group-item list-group-item-action list-group-item-light task-todo">${newTask.task}
             <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn btn btn-outline-success">&check;</button>
-            <button data-task-id="${newTask.id}" class="deleteBtn btn btn-dark btn-sm">Delete</button></li>
+            <button data-task-id="${newTask.id}" class="deleteBtn btn btn-danger btn-sm float-right">Delete</button></li>
             <ul class="task-info list-group">
                 <li class="list-group-item list-group-item-action list-group-item-light">${newTask.notes}</li>
                 <li class="list-group-item list-group-item-action list-group-item-light">${newTask.date_made}</li>
