@@ -131,8 +131,9 @@ function appendTasks(addTasks) {
             $('#taskListOut').append(`
 
             <div>
+            
                 <li class="list-group-item list-group-item-action list-group-item-success task-todo">
-                    ${newTask.task}
+                   
                     <!-- Complete Button -->
                     <button 
                         data-task-id="${newTask.id}" 
@@ -141,6 +142,7 @@ function appendTasks(addTasks) {
                     >
                         &check;
                     </button>
+                    ${newTask.task}
 
                     <!-- Delete Button -->
                     <button 
@@ -164,7 +166,6 @@ function appendTasks(addTasks) {
             
             <div>
                 <li class="list-group-item list-group-item-action list-group-item-light task-todo">
-                    ${newTask.task}
                     <!-- Complete Button -->
                     <button 
                         data-task-id="${newTask.id}" 
@@ -173,6 +174,8 @@ function appendTasks(addTasks) {
                     >
                         &check;
                     </button>
+                    ${newTask.task}
+
                     <!-- Delete Button -->
                     <button 
                         data-task-id="${newTask.id}" 
