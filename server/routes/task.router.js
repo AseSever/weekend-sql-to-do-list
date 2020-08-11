@@ -7,7 +7,7 @@ const taskRouter = express.Router();
 // GET route
 taskRouter.get('/', (req, res) => {
     let queryText = `
-        SELECT * FROM "task_list" 
+        SELECT * FROM "task_list"
         ORDER BY "task";
         `;
 

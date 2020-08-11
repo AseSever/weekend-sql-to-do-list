@@ -1,4 +1,4 @@
-// const { default: swal } = require("sweetalert");
+
 
 console.log('JS loaded');
 
@@ -22,6 +22,7 @@ function taskToggleComplete() {
     console.log('complete clicked');
     const id = $(this).data('task-id'); // targeting chosen id
     const status = $(this).data('task-status'); // targeting chosen status --true or false
+    
     console.log(id, status);
 
     // PUT request -- status = complete or not
@@ -123,28 +124,72 @@ function appendTasks(addTasks) {
     $('#taskListOut').empty();
     for (let i = 0; i < addTasks.length; i++) {
         let newTask = addTasks[i];
-
+        // let taskDate = new Date(newTask.date_made);
+        let taskDate = moment(newTask.date_made).format('lll');
         //if status is true will give background color to html
         if (newTask.status === true) {
-            $('#taskListOut').append(`<div>
-            <li class="list-group-item list-group-item-action list-group-item-success task-todo">${newTask.task}
-        <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn btn btn-outline-success">&check;</button>
-        <button data-task-id="${newTask.id}" class="deleteBtn btn btn-danger btn-sm float-right">Delete</button></li>
-            <li class="list-group-item list-group-item-action list-group-item-success">${newTask.notes}</li>
-            <li class="list-group-item list-group-item-action list-group-item-success">${newTask.date_made}</li>
-        </div>`);
+            $('#taskListOut').append(`
+
+            <div>
+                <li class="list-group-item list-group-item-action list-group-item-success task-todo">
+                    ${newTask.task}
+                    <!-- Complete Button -->
+                    <button 
+                        data-task-id="${newTask.id}" 
+                        data-task-status="${newTask.status}" 
+                        class="completeBtn btn btn-outline-success"
+                    >
+                        &check;
+                    </button>
+
+                    <!-- Delete Button -->
+                    <button 
+                        data-task-id="${newTask.id}" 
+                        class="deleteBtn btn btn-danger btn-sm float-right"
+                    >
+                        Delete
+                    </button>
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item-success">
+                    ${newTask.notes}
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item-success">
+                    ${taskDate}
+                </li>
+            </div>
+        `);
             //if status is false will not give background color to html
         } else if (newTask.status === false) {
-            $('#taskListOut').append(`<div>
-            <li class="list-group-item list-group-item-action list-group-item-light task-todo">${newTask.task}
-        <button data-task-id="${newTask.id}" data-task-status="${newTask.status}" class="completeBtn btn btn-outline-success">&check;</button>
-        <button data-task-id="${newTask.id}" class="deleteBtn btn btn-danger btn-sm float-right">Delete</button></li>
-            <li class="list-group-item list-group-item-action list-group-item-light">${newTask.notes}</li>
-            <li class="list-group-item list-group-item-action list-group-item-light">${newTask.date_made}</li>
-        </div>`);
+            $('#taskListOut').append(`
+            
+            <div>
+                <li class="list-group-item list-group-item-action list-group-item-light task-todo">
+                    ${newTask.task}
+                    <!-- Complete Button -->
+                    <button 
+                        data-task-id="${newTask.id}" 
+                        data-task-status="${newTask.status}" 
+                        class="completeBtn btn btn-outline-success"
+                    >
+                        &check;
+                    </button>
+                    <!-- Delete Button -->
+                    <button 
+                        data-task-id="${newTask.id}" 
+                        class="deleteBtn btn btn-danger btn-sm float-right"
+                    >
+                        Delete
+                    </button>
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item-light">
+                    ${newTask.notes}
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item-light">
+                    ${taskDate}
+                </li>
+            </div>
+        `);
         }// end conditional for toggleing complete
-        // I tried many a way to addClass after click and was really
-        // stumbling around.  So this was my work-around atm and I hate
-        // all this text 
+        
     }// for loop 
 } // end appendTasks

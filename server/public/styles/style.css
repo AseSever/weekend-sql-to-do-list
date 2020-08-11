@@ -1,8 +1,14 @@
 html {
-    margin: 2rem;
+    margin: 3
+    rem;
+    background-color: lightskyblue;
 }
 
 h1 {
     color: orangered;
     text-align: center;
+}
+
+.colorComplete {
+    background-color: lightcoral;
 }
